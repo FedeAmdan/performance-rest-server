@@ -3,16 +3,44 @@ Performance REST Server
 
 Rest Server used for performance tests. It generates a WAR package, so it can be deployed using Apache Tomcat.
 
-If you want to use it, you just need to run "mvn clean install".
+If you want to use it, you just need to run "mvn clean install". This command will create the war file.
 
-Rest call:
+###Rest calls:
 
-http://localhost:8080/rest-server/letters/{number}
-
+####GET  /letters/{amountOfLetters}
 This returns a payload with the amount of letters that the user requested in the pathParam.
+
 Example:
+```
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/letters/4
 
+ffff
+```
+-----------------------------------------------------------------------------------------------------
 
-http://localhost:8080/rest-server/letters/3
+####GET  /strictdelay/{miliseconds} 
+This call makes a response after an strict amount of miliseconds
 
-Response: "fff"
+Example:
+```
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/strictdelay/400
+
+Waited for 400 miliseconds
+```
+-----------------------------------------------------------------------------------------------------
+
+####GET  /randomdelay/{maxMiliseconds} 
+This call makes a response after a random amount of miliseconds, between 0 and the given path parameter
+
+Examples:
+```
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay/400
+
+Waited for 343 miliseconds
+```
+
+```
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay/400
+
+Waited for 105 miliseconds
+```
