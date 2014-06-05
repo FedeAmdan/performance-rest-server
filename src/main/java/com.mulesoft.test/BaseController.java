@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -47,13 +48,25 @@ public class BaseController {
         model.addAttribute("message", "Waited for " + wait + " miliseconds");
         return "index";
     }
-    //
-    //
-    //@RequestMapping(value = "/add", method = RequestMethod.POST)
-    //public String addUser(@PathVariable("user") String user, ModelMap model) throws InterruptedException {
-    //    int delay = 4000;
-    //    Thread.sleep(delay);
-    //    model.addAttribute("message", "Waited for " + delay + " miliseconds");
-    //    return "index";
-    //}
+
+    @RequestMapping(value="/strictdelayletters", method = RequestMethod.GET,params = {"miliseconds", "letters"})
+    public String strictDelayLetters(@RequestParam(value = "miliseconds") int maxMiliseconds,
+                                     @RequestParam(value = "letters") int letters,  ModelMap model) throws InterruptedException
+    {
+        Thread.sleep(maxMiliseconds);
+        String repeated = StringUtils.repeat("f",letters);
+        model.addAttribute("message", repeated);
+        return "index";
+    }
+
+    @RequestMapping(value="/randomdelayletters", method = RequestMethod.GET,params = {"miliseconds", "letters"})
+    public String randomDelayLetters(@RequestParam(value = "miliseconds") int maxMiliseconds,
+                              @RequestParam(value = "letters") int letters,  ModelMap model) throws InterruptedException
+    {
+        Random r = new Random();
+        Thread.sleep(r.nextInt(maxMiliseconds));
+        String repeated = StringUtils.repeat("f",letters);
+        model.addAttribute("message", repeated);
+        return "index";
+    }
 }

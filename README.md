@@ -44,3 +44,27 @@ Waited for 343 miliseconds
 
 Waited for 105 miliseconds
 ```
+-----------------------------------------------------------------------------------------------------
+
+####GET  /rest-server/strictdelayletters?miliseconds={miliseconds}&letters={letters}
+This call returns a payload with the amount of letters that the user requested in the query parameter.
+It makes a response after an strict amount of miliseconds.
+
+Example:
+```
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/strictdelayletters?miliseconds=30&letters=3
+
+fff
+```
+-----------------------------------------------------------------------------------------------------
+
+####GET  /rest-server/randomdelayletters?miliseconds={maxMiliseconds}&letters={letters}
+This call returns a payload with the amount of letters that the user requested in the query parameter.
+It makes a response after a random amount of miliseconds, between 0 and the given path parameter
+
+Example:
+```
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelayletters?miliseconds=30&letters=3
+
+fff
+```
