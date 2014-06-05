@@ -18,35 +18,35 @@ ffff
 ```
 -----------------------------------------------------------------------------------------------------
 
-####GET  /strictdelay/{miliseconds} 
+####GET  /strictdelay?miliseconds={miliseconds}
 This call makes a response after an strict amount of miliseconds
 
 Example:
 ```
-➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/strictdelay/400
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/strictdelay?miliseconds=400
 
 Waited for 400 miliseconds
 ```
 -----------------------------------------------------------------------------------------------------
 
-####GET  /randomdelay/{maxMiliseconds} 
+####GET  /randomdelay?miliseconds={miliseconds}
 This call makes a response after a random amount of miliseconds, between 0 and the given path parameter
 
 Examples:
 ```
-➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay/400
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay?miliseconds=400
 
 Waited for 343 miliseconds
 ```
 
 ```
-➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay/400
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay?miliseconds=400
 
 Waited for 105 miliseconds
 ```
 -----------------------------------------------------------------------------------------------------
 
-####GET  /rest-server/strictdelayletters?miliseconds={miliseconds}&letters={letters}
+####GET  /rest-server/strictdelay?miliseconds={miliseconds}&letters={letters}
 This call returns a payload with the amount of letters that the user requested in the query parameter.
 It makes a response after an strict amount of miliseconds.
 
@@ -58,7 +58,7 @@ fff
 ```
 -----------------------------------------------------------------------------------------------------
 
-####GET  /rest-server/randomdelayletters?miliseconds={maxMiliseconds}&letters={letters}
+####GET  /rest-server/randomdelay?miliseconds={maxMiliseconds}&letters={letters}
 This call returns a payload with the amount of letters that the user requested in the query parameter.
 It makes a response after a random amount of miliseconds, between 0 and the given path parameter
 

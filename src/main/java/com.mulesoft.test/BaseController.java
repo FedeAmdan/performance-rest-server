@@ -31,25 +31,25 @@ public class BaseController {
         return "index";
     }
 
-    @RequestMapping(value="/strictdelay/{miliseconds}", method = RequestMethod.GET)
-    public String strictdelay(@PathVariable int miliseconds, ModelMap model) throws InterruptedException
+    @RequestMapping(value="/strictdelay", method = RequestMethod.GET)
+    public String strictdelay(@RequestParam(value = "miliseconds") int miliseconds, ModelMap model) throws InterruptedException
     {
         Thread.sleep(miliseconds);
         model.addAttribute("message", "Waited for " + miliseconds + " miliseconds");
         return "index";
     }
 
-    @RequestMapping(value="/randomdelay/{maxMiliseconds}", method = RequestMethod.GET)
-    public String randomdelay(@PathVariable int maxMiliseconds, ModelMap model) throws InterruptedException
+    @RequestMapping(value="/randomdelay", method = RequestMethod.GET,params = {"miliseconds"})
+    public String randomdelay(@RequestParam(value = "miliseconds") int miliseconds, ModelMap model) throws InterruptedException
     {
         Random r = new Random();
-        int wait = r.nextInt(maxMiliseconds);
+        int wait = r.nextInt(miliseconds);
         Thread.sleep(wait);
         model.addAttribute("message", "Waited for " + wait + " miliseconds");
         return "index";
     }
 
-    @RequestMapping(value="/strictdelayletters", method = RequestMethod.GET,params = {"miliseconds", "letters"})
+    @RequestMapping(value="/strictdelay", method = RequestMethod.GET,params = {"miliseconds", "letters"})
     public String strictDelayLetters(@RequestParam(value = "miliseconds") int maxMiliseconds,
                                      @RequestParam(value = "letters") int letters,  ModelMap model) throws InterruptedException
     {
@@ -59,7 +59,7 @@ public class BaseController {
         return "index";
     }
 
-    @RequestMapping(value="/randomdelayletters", method = RequestMethod.GET,params = {"miliseconds", "letters"})
+    @RequestMapping(value="/randomdelay", method = RequestMethod.GET,params = {"miliseconds", "letters"})
     public String randomDelayLetters(@RequestParam(value = "miliseconds") int maxMiliseconds,
                               @RequestParam(value = "letters") int letters,  ModelMap model) throws InterruptedException
     {
