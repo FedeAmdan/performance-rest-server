@@ -52,7 +52,7 @@ It makes a response after an strict amount of miliseconds.
 
 Example:
 ```
-➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/strictdelayletters?miliseconds=30&letters=3
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/strictdelay?miliseconds=30&letters=3
 
 fff
 ```
@@ -64,7 +64,7 @@ It makes a response after a random amount of miliseconds, between 0 and the give
 
 Example:
 ```
-➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelayletters?miliseconds=30&letters=3
+➜  ~ ✗ curl -XGET http://localhost:8080/rest-server/randomdelay?miliseconds=30&letters=3
 
 fff
 ```
