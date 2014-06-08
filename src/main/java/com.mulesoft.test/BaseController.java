@@ -32,41 +32,38 @@ public class BaseController {
     }
 
     @RequestMapping(value="/strictdelay", method = RequestMethod.GET)
-    public String strictdelay(@RequestParam(value = "miliseconds") int miliseconds, ModelMap model) throws InterruptedException
-    {
-        Thread.sleep(miliseconds);
-        model.addAttribute("message", "Waited for " + miliseconds + " miliseconds");
-        return "index";
-    }
-
-    @RequestMapping(value="/randomdelay", method = RequestMethod.GET,params = {"miliseconds"})
-    public String randomdelay(@RequestParam(value = "miliseconds") int miliseconds, ModelMap model) throws InterruptedException
-    {
-        Random r = new Random();
-        int wait = r.nextInt(miliseconds);
-        Thread.sleep(wait);
-        model.addAttribute("message", "Waited for " + wait + " miliseconds");
-        return "index";
-    }
-
-    @RequestMapping(value="/strictdelay", method = RequestMethod.GET,params = {"miliseconds", "letters"})
     public String strictDelayLetters(@RequestParam(value = "miliseconds") int maxMiliseconds,
-                                     @RequestParam(value = "letters") int letters,  ModelMap model) throws InterruptedException
+                              @RequestParam(value = "letters", required = false) String letters,  ModelMap model) throws InterruptedException
     {
         Thread.sleep(maxMiliseconds);
-        String repeated = StringUtils.repeat("f",letters);
-        model.addAttribute("message", repeated);
+        if  (letters != null)
+        {
+            String repeated = StringUtils.repeat("f",Integer.parseInt(letters));
+            model.addAttribute("message", repeated);
+        }
+        else
+        {
+            model.addAttribute("message", "Waited for " + maxMiliseconds + " miliseconds");   
+        }
         return "index";
     }
 
-    @RequestMapping(value="/randomdelay", method = RequestMethod.GET,params = {"miliseconds", "letters"})
+    @RequestMapping(value="/randomdelay", method = RequestMethod.GET)
     public String randomDelayLetters(@RequestParam(value = "miliseconds") int maxMiliseconds,
-                              @RequestParam(value = "letters") int letters,  ModelMap model) throws InterruptedException
+                              @RequestParam(value = "letters", required = false) String letters,  ModelMap model) throws InterruptedException
     {
         Random r = new Random();
-        Thread.sleep(r.nextInt(maxMiliseconds));
-        String repeated = StringUtils.repeat("f",letters);
-        model.addAttribute("message", repeated);
+        int wait = r.nextInt(maxMiliseconds);
+        Thread.sleep(wait);
+        if (letters != null)
+        {
+            String repeated = StringUtils.repeat("f",Integer.parseInt(letters));
+            model.addAttribute("message", repeated);
+        }
+        else
+        {
+            model.addAttribute("message", "Waited for " + wait + " miliseconds");
+        }
         return "index";
     }
 }
